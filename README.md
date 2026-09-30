@@ -22,6 +22,6 @@ Os instaladores ainda não têm assinatura de loja, então o sistema pede confir
 
 ## Atualizar
 
-O app verifica sozinho. Quando houver versão nova, aparece um aviso no card. Também dá para
-verificar em ⚙️ Ajustes › **Verificar** › **Atualizar**. A atualização é assinada e verificada
-antes de instalar.
+O app verifica sozinho (ao abrir e a cada 4 h). Quando houver versão nova, o botão de atualizar
+no canto superior direito do card fica **verde**: clique para instalar e reiniciar. A atualização
+é assinada e verificada antes de instalar.
