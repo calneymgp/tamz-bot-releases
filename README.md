@@ -1,3 +1,5 @@
+<img src="tamz-icon-dark.svg" width="72" alt="TAMZ" />
+
 # TAMZ Bot — instaladores
 
 Copiloto desktop do [TAMZ](https://tamz.ai) para SDRs: um pill flutuante que identifica a
