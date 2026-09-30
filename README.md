@@ -9,12 +9,14 @@ Este repositório tem **só os instaladores**. O código-fonte é privado.
 
 ## Instalar
 
-Baixe a [última versão](../../releases/latest):
+**Página de download:** https://calneymgp.github.io/tamz-bot-releases/
 
-| Sistema | Arquivo |
+Links diretos, sempre da versão mais nova:
+
+| Sistema | Link |
 |---|---|
-| macOS (Apple Silicon e Intel) | `TAMZ.Bot_X.Y.Z_universal.dmg` |
-| Windows 10/11 | `TAMZ.Bot_X.Y.Z_x64-setup.exe` |
+| macOS (Apple Silicon e Intel) | [TAMZ-Bot-mac.dmg](https://github.com/calneymgp/tamz-bot-releases/releases/latest/download/TAMZ-Bot-mac.dmg) |
+| Windows 10/11 | [TAMZ-Bot-windows.exe](https://github.com/calneymgp/tamz-bot-releases/releases/latest/download/TAMZ-Bot-windows.exe) |
 
 Os instaladores ainda não têm assinatura de loja, então o sistema pede confirmação na 1ª abertura:
 

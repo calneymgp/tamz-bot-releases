@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Baixar TAMZ Bot</title>
+    <meta name="description" content="Copiloto desktop do TAMZ: identifica a pessoa ou empresa na sua tela e mostra sócios, celular, WhatsApp e e-mail." />
+    <link rel="icon" type="image/svg+xml" href="tamz-icon-dark.svg" />
+    <meta property="og:title" content="TAMZ Bot — baixe para Mac e Windows" />
+    <meta property="og:description" content="Sócios, celular, WhatsApp e e-mail de quem está na sua tela." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #fbf7f0;
+        --card: #fffcf5;
+        --fg: #1c1c1c;
+        --muted: #7a7169;
+        --line: rgba(28, 28, 28, 0.09);
+        --accent: #c25430;
+        --accent-strong: #b44a27;
+        --accent-bg: rgba(194, 84, 48, 0.1);
+        --shadow: 0 24px 60px -24px rgba(60, 30, 10, 0.35);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #161616;
+          --card: #1f1f1f;
+          --fg: #f4efe7;
+          --muted: #a39a90;
+          --line: rgba(255, 255, 255, 0.09);
+          --accent: #db6536;
+          --accent-strong: #c25430;
+          --accent-bg: rgba(219, 101, 54, 0.14);
+          --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(70% 50% at 50% -10%, var(--accent-bg), transparent 70%),
+          var(--bg);
+        color: var(--fg);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 16px;
+      }
+      main {
+        width: 100%;
+        max-width: 560px;
+        padding: 72px 0 40px;
+        text-align: center;
+      }
+      .icon {
+        width: 112px;
+        height: 112px;
+        filter: drop-shadow(0 18px 30px rgba(60, 30, 10, 0.28));
+        animation: rise 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.96);
+        }
+      }
+      h1 {
+        margin: 22px 0 8px;
+        font-size: clamp(32px, 7vw, 44px);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+      .lead {
+        margin: 0 auto;
+        max-width: 440px;
+        font-size: 16.5px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .actions {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 54px;
+        padding: 0 26px;
+        border-radius: 16px;
+        background: var(--accent-strong);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 10px 24px -10px rgba(194, 84, 48, 0.7);
+        transition: transform 120ms, filter 120ms;
+      }
+      .primary:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+      }
+      .primary svg {
+        width: 20px;
+        height: 20px;
+      }
+      .other {
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+      .other a {
+        color: var(--accent);
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .other a:hover {
+        text-decoration: underline;
+      }
+      .version {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .steps {
+        margin-top: 44px;
+        text-align: left;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 6px;
+        box-shadow: var(--shadow);
+      }
+      .tabs {
+        display: flex;
+        gap: 4px;
+        padding: 4px;
+      }
+      .tabs button {
+        flex: 1;
+        height: 36px;
+        border: 0;
+        border-radius: 12px;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .tabs button[aria-selected="true"] {
+        background: var(--accent-bg);
+        color: var(--accent);
+      }
+      ol {
+        margin: 0;
+        padding: 10px 22px 18px 42px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      ol li {
+        padding: 5px 0;
+      }
+      ol li::marker {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      kbd,
+      b {
+        font-weight: 600;
+      }
+      .note {
+        margin: 0 18px 16px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--accent-bg);
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--fg);
+      }
+      .features {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        text-align: left;
+      }
+      .feature {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+      .feature strong {
+        display: block;
+        margin-bottom: 3px;
+        font-size: 13.5px;
+        color: var(--fg);
+      }
+      @media (max-width: 520px) {
+        main {
+          padding-top: 48px;
+        }
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+      footer {
+        padding: 24px 0 36px;
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="tamz-icon-dark.svg" alt="" />
+      <h1>TAMZ Bot</h1>
+      <p class="lead">
+        O copiloto do TAMZ no seu computador. Abra um perfil do LinkedIn ou o site de uma empresa e veja sócios,
+        celular, WhatsApp e e-mail sem sair da tela.
+      </p>
+
+      <div class="actions">
+        <a class="primary" id="primary" href="https://github.com/calneymgp/tamz-bot-releases/releases/latest/download/TAMZ-Bot-mac.dmg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+          </svg>
+          <span id="primary-label">Baixar para Mac</span>
+        </a>
+        <div class="other" id="other"></div>
+        <div class="version" id="version"></div>
+      </div>
+
+      <section class="steps" aria-label="Como instalar">
+        <div class="tabs" role="tablist">
+          <button role="tab" id="tab-mac" aria-selected="true">macOS</button>
+          <button role="tab" id="tab-win" aria-selected="false">Windows</button>
+        </div>
+        <div id="steps-mac">
+          <ol>
+            <li>Abra o arquivo <b>TAMZ-Bot-mac.dmg</b> e arraste o TAMZ Bot para <b>Aplicativos</b>.</li>
+            <li>Na 1ª vez, clique com o botão direito no app › <b>Abrir</b> › <b>Abrir</b>.</li>
+            <li>Libere em Ajustes do Sistema › Privacidade e Segurança › <b>Acessibilidade</b>, para o bot ler a página aberta.</li>
+            <li>Entre com a sua conta do TAMZ. Pronto: o pill aparece no rodapé da tela.</li>
+          </ol>
+          <p class="note">Funciona em Macs Apple Silicon e Intel, macOS 10.15 ou mais novo.</p>
+        </div>
+        <div id="steps-win" hidden>
+          <ol>
+            <li>Abra o arquivo <b>TAMZ-Bot-windows.exe</b>.</li>
+            <li>Se aparecer "O Windows protegeu seu PC", clique em <b>Mais informações</b> › <b>Executar assim mesmo</b>.</li>
+            <li>Siga o instalador: não precisa de administrador.</li>
+            <li>Entre com a sua conta do TAMZ. Pronto: o pill aparece no rodapé da tela.</li>
+          </ol>
+          <p class="note">Windows 10 ou 11, 64 bits. Leve: pensado para PCs de 8 GB de RAM.</p>
+        </div>
+      </section>
+
+      <div class="features">
+        <div class="feature"><strong>Na hora certa</strong>Atalho ou clique no pill: o card abre com quem está na tela.</div>
+        <div class="feature"><strong>Contato direto</strong>Celular com WhatsApp e e-mail, com créditos do seu plano.</div>
+        <div class="feature"><strong>Sempre atual</strong>Atualiza sozinho: o botão fica verde quando há versão nova.</div>
+      </div>
+    </main>
+    <footer>© TAMZ · <a href="https://tamz.ai">tamz.ai</a></footer>
+
+    <script>
+      const base = "https://github.com/calneymgp/tamz-bot-releases/releases/latest/download/";
+      const files = { mac: "TAMZ-Bot-mac.dmg", win: "TAMZ-Bot-windows.exe" };
+      const names = { mac: "Mac", win: "Windows" };
+      const ua = navigator.userAgent;
+      const os = /Windows/i.test(ua) ? "win" : "mac";
+      const other = os === "mac" ? "win" : "mac";
+
+      document.getElementById("primary").href = base + files[os];
+      document.getElementById("primary-label").textContent = `Baixar para ${names[os]}`;
+      document.getElementById("other").innerHTML = `Também para <a href="${base + files[other]}">${names[other]}</a>`;
+
+      const tab = (which) => {
+        for (const k of ["mac", "win"]) {
+          document.getElementById(`tab-${k}`).setAttribute("aria-selected", String(k === which));
+          document.getElementById(`steps-${k}`).hidden = k !== which;
+        }
+      };
+      document.getElementById("tab-mac").onclick = () => tab("mac");
+      document.getElementById("tab-win").onclick = () => tab("win");
+      tab(os);
+
+      fetch("https://api.github.com/repos/calneymgp/tamz-bot-releases/releases/latest")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((r) => {
+          if (!r) return;
+          const date = new Date(r.published_at).toLocaleDateString("pt-BR");
+          document.getElementById("version").textContent = `${r.tag_name} · ${date}`;
+        })
+        .catch(() => {});
+    </script>
+  </body>
+</html>

@@ -112,6 +112,28 @@ jobs:
     needs: [create-release, build]
     runs-on: ubuntu-latest
     steps:
+      # Cópias com nome sem versão: o link .../releases/latest/download/TAMZ-Bot-mac.dmg
+      # (página de download) sempre aponta para a versão mais nova. Roda com a release
+      # ainda em rascunho, então o link nunca fica quebrado.
+      - name: Links fixos de download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ needs.create-release.outputs.release_id }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/$GITHUB_REPOSITORY/releases"
+          copy() {
+            local pattern="$1" name="$2" id
+            id=$(gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets" --jq ".[] | select(.name | test(\"$pattern\")) | .id" | head -1)
+            [ -n "$id" ] || { echo "sem arquivo $pattern na release" >&2; exit 1; }
+            curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" "$api/assets/$id" -o "$name"
+            curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" \
+              --data-binary "@$name" "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?name=$name" > /dev/null
+            echo "ok: $name"
+          }
+          copy '\\.dmg$' TAMZ-Bot-mac.dmg
+          copy '-setup\\.exe$' TAMZ-Bot-windows.exe
+
       - uses: actions/github-script@v7
         env:
           RELEASE_ID: ${{ needs.create-release.outputs.release_id }}
